@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>    
+  
+    <title></title>
+    <meta name="description" content="Chrome-style Browser in HTML/CSS/JS.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script>if(location.hash==="#dark")document.documentElement.classList.add("dark");</script>
+    <script src="/js/draggabilly.js" type="module"></script>
+    <script src="/uv/uv.bundle.js" type="module"></script>
+    <script src="/uv/uv.config.js" type="module"></script>
+    <script src="/js/index.js" type="module"></script>
+    <link href="/css/browser.css" rel="stylesheet">
+    <link href="/css/chrome-tabs.css" rel="stylesheet">
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+    /*define the modal-content background*/
+     
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        border: none;
+        border-radius: 25px;        
+        padding: 20px;
+        width: 80%;
+        height: 80%px;      
+    }
+
+    
+    /*define the close button*/
+
+     
+</style>    
+  </head>
+  
+  <body class="dark-theme">
+
+    <!-- Tab bar -->
+    <div class="chrome-tabs" style="--tab-content-margin: 9px">
+      <div class="chrome-tabs-content">
+      </div>
+      <div class="new-tab-button-wrapper">
+        <button class="new-tab-button">&#65291;</button>
+      </div>
+      <div class="chrome-tabs-bottom-bar"></div>
+    </div>
+
+    <!-- Url bar -->
+    <div class="browser-bar">
+      
+      <div id="pageBack">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill-rule="evenodd" class="browser-bar-btn browser-bar-btn-disabled" viewBox="0 0 32 32">
+          <path stroke-width="0px" stroke-linecap="round" shape-rendering="geometricPrecision" d="M 4.22 14.03 C 3.53 14.15 3 14.77 3 15.5 C 3 16.25 3.53 16.86 4.24 16.98 L 4.02 17.19 L 14.36 27.51 C 14.65 27.81 15.05 28 15.5 28 C 16.33 28 17 27.33 17 26.5 C 17 26.05 16.8 25.65 16.49 25.38 L 16.55 25.32 L 8.22 17 L 27.51 17 C 28.33 17 29 16.33 29 15.5 C 29 14.67 28.33 14 27.51 14 L 8.2 14 L 16.55 5.66 C 16.81 5.34 17 4.94 17 4.5 C 17 3.68 16.33 3 15.5 3 C 15.06 3 14.66 3.2 14.39 3.5 L 14.36 3.47 L 4 13.81 Z"></path>
+        </svg>
+      </div>
+      
+      <div style="height: 1px; width: 5px;"></div>
+      
+      <div id="pageForward">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill-rule="evenodd" class="browser-bar-btn browser-bar-btn-disabled" viewBox="0 0 32 32">
+          <path stroke-width="0px" stroke-linecap="round" shape-rendering="geometricPrecision" d="M 27.78 14.03 C 28.47 14.15 29 14.77 29 15.5 C 29 16.25 28.47 16.86 27.76 16.98 L 27.98 17.19 L 17.64 27.51 C 17.35 27.81 16.95 28 16.5 28 C 15.67 28 15 27.33 15 26.5 C 15 26.05 15.2 25.65 15.51 25.38 L 15.45 25.32 L 23.78 17 L 4.49 17 C 3.67 17 3 16.33 3 15.5 C 3 14.67 3.67 14 4.49 14 L 23.8 14 L 15.45 5.66 C 15.19 5.34 15 4.94 15 4.5 C 15 3.68 15.67 3 16.5 3 C 16.94 3 17.34 3.2 17.61 3.5 L 17.64 3.47 L 28 13.81 Z"></path>
+        </svg>
+      </div>
+      
+      <div style="height: 1px; width: 5px;"></div>
+      
+      <div id="pageReload">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill-rule="evenodd" class="browser-bar-btn browser-bar-btn-enabled" viewBox="0 0 32 32">
+          <path stroke-width="0px" stroke-linecap="round" shape-rendering="geometricPrecision" d="M 25.1 20.15 L 25.08 20.14 C 23.51 23.59 20.04 26 16 26 C 10.48 26 6 21.52 6 16 C 6 10.48 10.48 6 16 6 C 19.02 6 21.72 7.34 23.55 9.45 L 23.55 9.45 L 19 14 L 25.8 14 L 28.83 14 L 30 14 L 30 3 L 25.67 7.33 C 23.3 4.67 19.85 3 16 3 C 8.82 3 3 8.82 3 16 C 3 23.18 8.82 29 16 29 C 21.27 29 25.8 25.86 27.84 21.34 C 27.96 21.13 28.03 20.88 28.03 20.61 C 28.03 19.78 27.36 19.11 26.53 19.11 C 25.87 19.11 25.3 19.55 25.1 20.15 Z"></path>
+        </svg>
+      </div>
+
+      <div style="height: 1px; width: 8px;"></div>
+      
+      <div class="addressbar">
+        <div style="height: 1px; width: 5px;"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill-rule="evenodd" class="browser-bar-btn addressbar-btn" viewBox="0 0 20 20">
+          <path stroke-width="0px" stroke-linecap="round" shape-rendering="geometricPrecision" d="M 9 14 h 2 v -4 H 9 v 4 Z m 1 -12 c -4.42 0 -8 3.58 -8 8 c 0 4.42 3.58 8 8 8 c 4.42 0 8 -3.58 8 -8 c 0 -4.42 -3.58 -8 -8 -8 Z m 0 14 c -3.31 0 -6 -2.69 -6 -6 c 0 -3.31 2.69 -6 6 -6 c 3.31 0 6 2.69 6 6 c 0 3.31 -2.69 6 -6 6 Z M 9 8 h 2 V 6 H 9 v 2 Z"></path>
+        </svg>
+        <div class="addressbar-urlbar" contenteditable="false" spellcheck="false"></div>
+      </div>
+      <div style="height: 1px; width: 5px;"></div>       
+      <div id="accountAvatar" onclick="document.getElementById('accountModal').style.display='block'">
+        <img id="accountAvatarURL" src="https://i0.wp.com/i.redd.it/bcyq3rjk2w071.png" 
+ width="32px" height="32px" class="browser-bar-btn browser-bar-btn-enabled">
+      </div>
+    
+      <div style="height: 1px; width: 5px;"></div>
+      <div id="darkModeToggle">
+        <svg width="32px" height="32px" viewBox="0 0 500 500" class="browser-bar-btn browser-bar-btn-enabled" xmlns="http://www.w3.org/2000/svg"><path stroke-width="0px" stroke-linecap="round" shape-rendering="geometricPrecision" d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"/></svg>  
+
+        
+      </div>      
+
+      <div style="height: 1px; width: 5px;"></div>
+
+      <div id="pageOpen" onclick="document.getElementById('moreModal').style.display='block'">
+        <svg width="24px" height="24px" class="browser-bar-btn browser-bar-btn-enabled" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>  
+
+      </div>      
+    </div>
+
+    <!-- Content -->
+    <div class="browser-tab-content">
+    </div>
+
+    <div id="moreModal" class="modal">
+            <div class="modal-content animate">
+              <iframe style="border: 0; width:100%; height: 500px; overflow: auto;" src="https://app.browseable.ml"></iframe>
+            </div>
+    </div>
+
+    <div id="accountModal" class="modal">
+            <div class="modal-content animate">
+              <iframe style="border: 0; width:100%; height: 500px; overflow: auto;" src="https://browseable.ml/account"></iframe>
+            </div>
+    </div>
+    
+    <div id="loginModal" class="modal">
+            <div class="modal-content animate">
+              <iframe style="border: 0; width:100%; height: 500px; overflow: auto;" src="https://browseable.ml/signin"></iframe>
+            </div>
+    </div>    
+    
+</div>
+<script>
+var modal = document.getElementById('moreModal');
+var accountModal = document.getElementById('accountModal');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    } else if (event.target == accountModal) {
+        accountModal.style.display = "none";
+    }
+}
+
+</script>  
+<script>
+  
+window.onload = function(){
+  fetch("https://api.ipify.org/?format=json").then(res => res.json()).then(data => check2(data))
+}
+
+function checkLoggedin(data){
+    console.log(data)
+    if (data["logged_in"] === false) {
+      document.getElementById('loginModal').style.display='block';   
+    } else {
+      document.getElementById('accountAvatarURL').src=data["avatar"];  
+    }    
+}
+
+function check2(ip) {
+    fetch("https://api.browseable.ml/api/v2/users/ping?ip=${ip}", {method: 'GET', credentials: 'same-origin',   headers: {'Content-Type': 'application/json'}})
+      .then(res => res.json())
+      .then(data_json => checkLoggedin(data_json));  
+}
+</script>
+  </body>
+</html>
