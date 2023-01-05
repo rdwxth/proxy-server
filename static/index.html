@@ -15,36 +15,35 @@
     <link href="/css/browser.css" rel="stylesheet">
     <link href="/css/chrome-tabs.css" rel="stylesheet">
 <style>
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 10000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
-    /*define the modal-content background*/
-     
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto 15% auto;
-        border: none;
-        border-radius: 25px;        
-        padding: 20px;
-        width: 80%;
-        height: 80%px;      
-    }
 
-    
-    /*define the close button*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-     
-</style>    
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;   
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 10px; 
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+ 
+</style>
   </head>
   
   <body class="dark-theme">
@@ -94,10 +93,18 @@
         <div class="addressbar-urlbar" contenteditable="false" spellcheck="false"></div>
       </div>
       <div style="height: 1px; width: 5px;"></div>       
-      <div id="accountAvatar" onclick="document.getElementById('accountModal').style.display='block'">
+
+    <div class="dropdown">
+      
+      <div id="accountAvatar" onclick="myFunction()" class="dropbtn">
         <img id="accountAvatarURL" src="https://i0.wp.com/i.redd.it/bcyq3rjk2w071.png" 
  width="32px" height="32px" class="browser-bar-btn browser-bar-btn-enabled">
+      <div class="dropdown-content">
+        <a href="https://browseable.ml/login">Login</a>
+        <a href="https://browseable.ml/register">Register</a>
       </div>
+      </div>
+    </div>
     
       <div style="height: 1px; width: 5px;"></div>
       <div id="darkModeToggle">
@@ -107,68 +114,43 @@
       </div>      
 
       <div style="height: 1px; width: 5px;"></div>
-
-      <div id="pageOpen" onclick="document.getElementById('moreModal').style.display='block'">
+<div class="dropdown">
+      <div id="moreSettings" onclick="document.getElementById('moreModal').style.display='block'">
         <svg width="24px" height="24px" class="browser-bar-btn browser-bar-btn-enabled" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>  
 
-      </div>      
+      </div> 
+      <div class="dropdown-content" style="right:0;">
+        <a href="https://app.browseable.ml">USA (Random) Node</a>
+        <a href="https://usa-ohio-node.onrender.com">USA (Ohio) Node</a>
+        <a href="https://usa-oregon-node.onrender.com">USA (Oregon) Node</a>
+        <a href="https://singapore-node.onrender.com">Singapore (Any) Node</a>
+        <a href="https://germany-node.onrender.com">Germany (Frankfurt) Node</a>        
+      </div> 
+    </div>
     </div>
 
     <!-- Content -->
     <div class="browser-tab-content">
     </div>
 
-    <div id="moreModal" class="modal">
-            <div class="modal-content animate">
-              <iframe style="border: 0; width:100%; height: 500px; overflow: auto;" src="https://app.browseable.ml"></iframe>
-            </div>
-    </div>
-
-    <div id="accountModal" class="modal">
-            <div class="modal-content animate">
-              <iframe style="border: 0; width:100%; height: 500px; overflow: auto;" src="https://browseable.ml/account"></iframe>
-            </div>
-    </div>
-    
-    <div id="loginModal" class="modal">
-            <div class="modal-content animate">
-              <iframe style="border: 0; width:100%; height: 500px; overflow: auto;" src="https://browseable.ml/signin"></iframe>
-            </div>
-    </div>    
-    
-</div>
 <script>
-var modal = document.getElementById('moreModal');
-var accountModal = document.getElementById('accountModal');
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    } else if (event.target == accountModal) {
-        accountModal.style.display = "none";
-    }
+function avatar(json) {
+  console.log(json)
+  var pfp = document.getElementById("accountAvatarURL")
+  if(json["logged_in"]===false){
+    
+  } else {
+    pfp.src = json["avatar"];
+  }
 }
-
-</script>  
-<script>
   
-window.onload = function(){
-  fetch("https://api.ipify.org/?format=json").then(res => res.json()).then(data => check2(data))
-}
-
-function checkLoggedin(data){
-    console.log(data)
-    if (data["logged_in"] === false) {
-      document.getElementById('loginModal').style.display='block';   
-    } else {
-      document.getElementById('accountAvatarURL').src=data["avatar"];  
-    }    
-}
-
-function check2(ip) {
-    fetch("https://api.browseable.ml/api/v2/users/ping?ip=${ip}", {method: 'GET', credentials: 'same-origin',   headers: {'Content-Type': 'application/json'}})
-      .then(res => res.json())
-      .then(data_json => checkLoggedin(data_json));  
-}
+// window.onload = function(){
+//     fetch("https://api.browseable.ml/v2/ping",{method: 'GET', credentials: 'include' , headers: {Accept: 'application/json', 'Content-Type': 'text/plain'} })
+//       .then(res => res.json())
+//       .then(data_json => avatar(data_json));
+// }
 </script>
+
+
   </body>
 </html>

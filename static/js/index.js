@@ -24,14 +24,14 @@ document.querySelector("#pageReload").addEventListener("click", () => {
 });
 
 document.querySelector("#darkModeToggle").addEventListener("click", () => {
-  var par, loc = window.location.href.split("https://app.browseable.ml/");
+  var par, loc = window.location.href.split(`https://${window.location.hostname}/`);
   console.log(loc)
   if (loc.indexOf("#dark") >= 0){
     console.log("Success")
-    window.location.href = "https://app.browseable.ml/#light";
+    window.location.href = `#light`;
     window.location.reload();    
   } else {
-    window.location.href = "https://app.browseable.ml/#dark";
+    window.location.href = `#dark`;
     window.location.reload();    
   }
 });

@@ -1,3 +1,3 @@
-language = "nodejs"
+language = "bash"
 run = "bash main.sh"
 onBoot = "chmod u+x main.sh"
